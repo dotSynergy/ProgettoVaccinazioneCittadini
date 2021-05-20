@@ -8,9 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
+/*
+ *       AUTORI - COMO:
+ *       Samuele Barella - mat.740688
+ *       Lorenzo Pengue -
+ *       Andrea Pini - mat.740675
  */
+
 public class App extends Application {
 
     private static Scene scene;
