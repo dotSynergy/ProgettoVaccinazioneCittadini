@@ -3,14 +3,13 @@ package cittadini.web;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 
 /**
@@ -63,43 +62,48 @@ public class ServerJSONHandler {
     /**
      * @return
      */
-    public CompletableFuture<JSONObject> makeGETRequest() throws IOException, InterruptedException {
-        return makeGETRequest(this.data, this.endpoint);
+    public CompletableFuture<JSONArray> makeRequest() throws IOException, InterruptedException {
+        return makeRequest(this.data, this.endpoint, WebMethods.GET);
     }
 
     /**
      * @return
      */
-    public CompletableFuture<JSONObject> makeGETRequest(JSONObject data) throws IOException, InterruptedException {
-        return makeGETRequest(data, this.endpoint);
+    public CompletableFuture<JSONArray> makeRequest(JSONObject data) throws IOException, InterruptedException {
+        return makeRequest(data, this.endpoint, WebMethods.GET);
     }
 
     /**
      * @param data
      * @return
      */
-    public CompletableFuture<JSONObject> makeGETRequest(JSONObject data, String endpoint) throws IOException, InterruptedException {
+    public CompletableFuture<JSONArray> makeRequest(JSONObject data, String endpoint, WebMethods method) throws IOException, InterruptedException {
         this.endpoint = endpoint;
         this.data = data;
 
-        return CompletableFuture.supplyAsync(new Supplier<JSONObject>() {
+        return CompletableFuture.supplyAsync(new Supplier<JSONArray>() {
             @Override
-            public JSONObject get() {
+            public JSONArray get() {
                 url = URI.create(baseUrl + endpoint);
 
                 var request = HttpRequest.newBuilder()
                         .uri(url)
-                        .header("Content-Type", "application/json")
-                        .PUT(HttpRequest.BodyPublishers.ofString(data.toString()))
-                        .build();
+                        .header("Content-Type", "application/json");
+                HttpRequest.BodyPublisher p = HttpRequest.BodyPublishers.ofString(data.toString());
+                request.method(method.name(), p);
 
                 var client = HttpClient.newHttpClient();
                 try {
-                    return new JSONObject(client.send(request, HttpResponse.BodyHandlers.ofString()));
-                } catch (IOException | InterruptedException e) {
+                    HttpResponse<String> t = client.send(request.build(), HttpResponse.BodyHandlers.ofString());
+
+                    if(t.statusCode() != 200)
+                        throw new ServerStatusException(t.statusCode());
+                    return new JSONArray(t.body());
+
+                } catch (IOException | InterruptedException | ServerStatusException e) {
                     e.printStackTrace();
                 }
-                return null;
+                return new JSONArray("[{}]");
             }
         });
     }
