@@ -1,7 +1,8 @@
-module org.example {
+module cittadini {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens org.example to javafx.fxml;
-    exports org.example;
+    opens cittadini to javafx.fxml;
+    exports cittadini;
+    exports cittadini.controllers;
 }
