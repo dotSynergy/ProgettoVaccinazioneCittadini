@@ -1,9 +1,13 @@
 package cittadini.controllers;
-/*
- *       AUTORI - COMO:
- *       Samuele Barella - mat.740688
- *       Lorenzo Pengue -
- *       Andrea Pini - mat.740675
+
+/**
+ * The Login controller for the Login view.
+ *
+ *       @author SEDE COMO
+ *       @author Samuele Barella - mat.740688
+ *       @author Lorenzo Pengue -
+ *       @author Andrea Pini - mat.740675
+ *
  */
 
 public class LoginController {

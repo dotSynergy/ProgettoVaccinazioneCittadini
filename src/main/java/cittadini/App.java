@@ -9,13 +9,15 @@ import javafx.stage.Stage;
 import java.io.Console;
 import java.io.IOException;
 
-/*
- *       AUTORI - COMO:
- *       Samuele Barella - mat.740688
- *       Lorenzo Pengue -
- *       Andrea Pini - mat.740675
+/**
+ * The App class, tasked with initializing our window and application.
+ *
+ *       @author SEDE COMO
+ *       @author Samuele Barella - mat.740688
+ *       @author Lorenzo Pengue -
+ *       @author Andrea Pini - mat.740675
+ *
  */
-
 public class App extends Application {
 
     private static Scene scene;
@@ -27,6 +29,12 @@ public class App extends Application {
         stage.show();
     }
 
+    /**
+     * Sets root.
+     *
+     * @param fxml the fxml
+     * @throws IOException the io exception
+     */
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
@@ -36,6 +44,11 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch();
     }

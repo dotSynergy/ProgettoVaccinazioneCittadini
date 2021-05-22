@@ -15,19 +15,25 @@ import java.util.function.Supplier;
 /**
  * This class creates an object tasked with communicating with the server.
  *
+ *       @author SEDE COMO
+ *       @author Samuele Barella - mat.740688
+ *       @author Lorenzo Pengue -
+ *       @author Andrea Pini - mat.740675
+ *
  */
 public class ServerJSONHandler {
 
-    /*
+    /**
      * Request parameters
      */
     private final String baseUrl = "http://dev.meliver.it:3000/";
     private String endpoint;
     private JSONObject data;
+    private WebMethods method;
     private URI url;
-    private static String jwt;
+    private static String jwt = "";
 
-    /*
+    /**
      * Response parameters
      */
     private CompletableFuture<JSONObject> response;
@@ -41,45 +47,54 @@ public class ServerJSONHandler {
     }
 
     /**
-     * @param endpoint
+     * Get full uri for the current request.
+     *
+     * @return the uri
      */
-    public ServerJSONHandler(String endpoint) {
-        this.endpoint = endpoint;
-    }
-
     public URI getURI(){
         return URI.create(baseUrl + endpoint);
     }
 
-    public void setEndpoint(String endpoint){
-        this.endpoint = endpoint;
-    }
-
-    public void setJWT(String jwt){
-        this.jwt = jwt;
-    }
+    /**
+     * Sets method.
+     *
+     * @param method the method
+     * @return the server json handler
+     */
+    public ServerJSONHandler setMethod(WebMethods method) {this.method = method; return this;}
 
     /**
-     * @return
+     * Set endpoint server json handler.
+     *
+     * @param endpoint the endpoint
+     * @return the server json handler
+     */
+    public ServerJSONHandler setEndpoint(String endpoint){this.endpoint = endpoint;  return this;}
+
+    /**
+     * Set jwt server json handler.
+     *
+     * @param jwt the json web token
+     * @return the server json handler
+     */
+    public ServerJSONHandler setJWT(String jwt){this.jwt = jwt;  return this;}
+
+    /**
+     * Set data server json handler.
+     *
+     * @param json the json
+     * @return the server json handler
+     */
+    public ServerJSONHandler setData(JSONObject json){this.data = json; return this;}
+
+    /**
+     * Make web request and returns a json array as completable future.
+     *
+     * @return completable future
+     * @throws IOException          the io exception
+     * @throws InterruptedException the interrupted exception
      */
     public CompletableFuture<JSONArray> makeRequest() throws IOException, InterruptedException {
-        return makeRequest(this.data, this.endpoint, WebMethods.GET);
-    }
-
-    /**
-     * @return
-     */
-    public CompletableFuture<JSONArray> makeRequest(JSONObject data) throws IOException, InterruptedException {
-        return makeRequest(data, this.endpoint, WebMethods.GET);
-    }
-
-    /**
-     * @param data
-     * @return
-     */
-    public CompletableFuture<JSONArray> makeRequest(JSONObject data, String endpoint, WebMethods method) throws IOException, InterruptedException {
-        this.endpoint = endpoint;
-        this.data = data;
 
         return CompletableFuture.supplyAsync(new Supplier<JSONArray>() {
             @Override
