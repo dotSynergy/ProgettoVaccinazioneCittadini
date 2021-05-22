@@ -6,17 +6,12 @@ package cittadini.web;
 public class ServerStatusException extends RuntimeException {
 
     /**
-     * The Code.
-     */
-    protected int code;
-
-    /**
      * Instantiates a new Server status exception.
      *
-     * @param code the code
+     * @param message the message
      */
-    public ServerStatusException(int code) {
-        super("Status code "+code);
+    public ServerStatusException(String message) {
+        super("Status code "+message);
     }
 
 }

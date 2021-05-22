@@ -94,7 +94,7 @@ public class ServerJSONHandler {
      * @throws IOException          the io exception
      * @throws InterruptedException the interrupted exception
      */
-    public CompletableFuture<JSONArray> makeRequest() throws IOException, InterruptedException {
+    public CompletableFuture<JSONArray> makeRequest() throws IOException, InterruptedException, ServerStatusException {
 
         return CompletableFuture.supplyAsync(new Supplier<JSONArray>() {
             @Override
@@ -104,6 +104,10 @@ public class ServerJSONHandler {
                 var request = HttpRequest.newBuilder()
                         .uri(url)
                         .header("Content-Type", "application/json");
+
+                if(jwt != null)
+                    request.header("Authorization", "Bearer "+jwt);
+
                 HttpRequest.BodyPublisher p = HttpRequest.BodyPublishers.ofString(data.toString());
                 request.method(method.name(), p);
 
@@ -112,13 +116,13 @@ public class ServerJSONHandler {
                     HttpResponse<String> t = client.send(request.build(), HttpResponse.BodyHandlers.ofString());
 
                     if(t.statusCode() != 200)
-                        throw new ServerStatusException(t.statusCode());
+                        throw new ServerStatusException(t.statusCode() + " on " + endpoint);
                     return new JSONArray(t.body());
 
                 } catch (IOException | InterruptedException | ServerStatusException e) {
                     e.printStackTrace();
+                    return new JSONArray("[{}]");
                 }
-                return new JSONArray("[{}]");
             }
         });
     }

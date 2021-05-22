@@ -25,22 +25,41 @@ class ServerJSONHandlerTest {
      */
     @DisplayName("Test makeRequest")
     @Test
-     void makeRequest() {
+     void makeRequest() throws IOException, InterruptedException, ServerStatusException {
+
         ServerJSONHandler s = new ServerJSONHandler();
+
+        login(s);
+
+        CompletableFuture<JSONArray> json = s
+                .setMethod(WebMethods.GET)
+                .setEndpoint("EventiAvversi")
+                .makeRequest();
+
+        System.out.println(json.join());
+
+    }
+
+    void login(ServerJSONHandler s) {
 
         try {
             JSONObject jsonobj = new JSONObject("{\'userName\': \'test\', \'password\': \'test\'}");
 
             CompletableFuture<JSONArray> json = s
                     .setMethod(WebMethods.POST)
-                    .setEndpoint("/rpc/login_cittadino")
+                    .setEndpoint("rpc/login_cittadino")
                     .setData(jsonobj)
                     .makeRequest();
 
-            System.out.println("started: " + json);
-            System.out.println("completed: " + json.join());
+            //System.out.println("started: " + json);
 
-        } catch (IOException | InterruptedException e) {
+            String token = (String) json.join().getJSONObject(0).get("token");
+
+            s.setJWT(token);
+
+            System.out.println("completed: " + json);
+
+        } catch (IOException | InterruptedException | ServerStatusException e) {
             e.printStackTrace();
         }
 
