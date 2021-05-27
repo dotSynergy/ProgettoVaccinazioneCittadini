@@ -44,7 +44,7 @@ public class ServerJSONHandler {
      * Instantiates a new Server json handler.
      */
     public ServerJSONHandler() {
-
+        data = new JSONObject("{}");
     }
 
     /**

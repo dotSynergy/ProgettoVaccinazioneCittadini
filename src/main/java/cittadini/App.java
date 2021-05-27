@@ -27,6 +27,7 @@ public class App extends Application {
 
     private static Scene loginScene;
     private static Scene registerScene;
+    private static Scene homeScene;
     private ServerJSONHandler s;
 
     @Override
@@ -35,10 +36,11 @@ public class App extends Application {
         s = new ServerJSONHandler();
         FXMLLoader loginLoader = loadFXML("login");
         FXMLLoader registerLoader = loadFXML("register");
-        //FXMLLoader homeLoader = loadFXML("home");
+        FXMLLoader homeLoader = loadFXML("home");
 
         loginScene = new Scene(loginLoader.load(), 570, 400);
         registerScene = new Scene(registerLoader.load(), 570, 400);
+        homeScene = new Scene(homeLoader.load(), 800, 600);
 
         stage.setScene(loginScene);
 
@@ -53,6 +55,7 @@ public class App extends Application {
                 if(loginController.login(s, checkUser, checkPassword)){
                     loginController.errorLabel.setText("Success");
                     loginController.errorLabel.setTextFill(Color.GREEN);
+                    stage.setScene(homeScene);
                 }
                 else{
                     loginController.errorLabel.setText("Incorrect user or password");
@@ -85,7 +88,6 @@ public class App extends Application {
 
         stage.show();
     }
-
 
 
     /**
