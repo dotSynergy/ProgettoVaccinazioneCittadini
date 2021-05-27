@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,8 +35,12 @@ public class HomeController implements Initializable {
     @FXML
     private ListView<String> vaccineCenterList;
 
+    @FXML
+    private Label nameLabel, surnameLabel, cfLabel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         s = new ServerJSONHandler();
 
         CompletableFuture<JSONArray> json = null;
@@ -49,16 +54,32 @@ public class HomeController implements Initializable {
         vaccineCenterList.setItems(obs);
 
         assert json != null;
-        JSONArray j = json.join();
+        JSONArray centersJson = json.join();
 
-        if(j != null && j.length() > 0){
-            for(int i = 0; i < j.length(); i++){
-                JSONObject tmp = j.getJSONObject(i);
+        if(centersJson != null && centersJson.length() > 0){
+            for(int i = 0; i < centersJson.length(); i++){
+                JSONObject tmp = centersJson.getJSONObject(i);
                 obs.add(tmp.getString("nomeCentro"));
             }
         }
 
+        try {
+            json = s.setEndpoint("Cittadini").makeRequest();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assert json != null;
+        JSONArray citizenJson = json.join();
+
+        if(citizenJson != null && citizenJson.length() > 0) {
+            JSONObject o = citizenJson.getJSONObject(0);
+
+            nameLabel.setText(o.getString("nome"));
+            surnameLabel.setText(o.getString("cognome"));
+            cfLabel.setText(o.getString("codiceFiscale"));
 
 
+        }
     }
 }
