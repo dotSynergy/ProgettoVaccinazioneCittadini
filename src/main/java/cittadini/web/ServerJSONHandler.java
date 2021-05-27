@@ -5,6 +5,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -119,7 +120,7 @@ public class ServerJSONHandler {
                         throw new ServerStatusException(t.statusCode() + " on " + endpoint);
                     return new JSONArray(t.body());
 
-                } catch (IOException | InterruptedException | ServerStatusException e) {
+                } catch (IOException | InterruptedException | ServerStatusException | JSONException e) {
                     e.printStackTrace();
                     return new JSONArray("[{}]");
                 }

@@ -1,12 +1,17 @@
 package cittadini;
 
+import cittadini.controllers.LoginController;
+import cittadini.controllers.RegisterController;
+import cittadini.web.ServerJSONHandler;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.io.Console;
 import java.io.IOException;
 
 /**
@@ -20,14 +25,68 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene;
+    private static Scene loginScene;
+    private static Scene registerScene;
+    private ServerJSONHandler s;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 570, 400);
-        stage.setScene(scene);
+
+        s = new ServerJSONHandler();
+        FXMLLoader loginLoader = loadFXML("login");
+        FXMLLoader registerLoader = loadFXML("register");
+        //FXMLLoader homeLoader = loadFXML("home");
+
+        loginScene = new Scene(loginLoader.load(), 570, 400);
+        registerScene = new Scene(registerLoader.load(), 570, 400);
+
+        stage.setScene(loginScene);
+
+        LoginController loginController = loginLoader.getController();
+        RegisterController registerController = registerLoader.getController();
+
+        loginController.loginButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                String checkUser = loginController.usernameText.getText().toString();
+                String checkPassword = loginController.passwordText.getText().toString();
+
+                if(loginController.login(s, checkUser, checkPassword)){
+                    loginController.errorLabel.setText("Success");
+                    loginController.errorLabel.setTextFill(Color.GREEN);
+                }
+                else{
+                    loginController.errorLabel.setText("Incorrect user or password");
+                    loginController.errorLabel.setTextFill(Color.RED);
+                }
+                loginController.usernameText.setText("");
+                loginController.passwordText.setText("");
+            }
+        });
+
+        loginController.registerButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                stage.setScene(registerScene);
+            }
+        });
+
+        registerController.registrationButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                if(registerController.register(s))
+                    stage.setScene(loginScene);
+                else registerController.error.setText("Error");
+            }
+        });
+
+        registerController.backButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                stage.setScene(loginScene);
+            }
+        });
+
         stage.show();
     }
+
+
 
     /**
      * Sets root.
@@ -36,12 +95,11 @@ public class App extends Application {
      * @throws IOException the io exception
      */
     static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+        loginScene.setRoot(loadFXML(fxml).load());
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+    private static FXMLLoader loadFXML(String fxml) throws IOException {
+        return new FXMLLoader(App.class.getResource(fxml + ".fxml"));
     }
 
     /**

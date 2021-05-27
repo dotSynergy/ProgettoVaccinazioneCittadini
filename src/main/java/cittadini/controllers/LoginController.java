@@ -16,11 +16,17 @@ import cittadini.web.WebMethods;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,10 +38,6 @@ import java.util.concurrent.CompletableFuture;
 
 public class LoginController implements Initializable {
 
-    String username = "";
-    String password = "";
-    String checkUser, checkPassword;
-
     @FXML
     public TextField usernameText;
 
@@ -43,38 +45,22 @@ public class LoginController implements Initializable {
     public TextField passwordText;
 
     @FXML
-    public Label Error;
+    public Label errorLabel;
 
     @FXML
     public Button loginButton;
 
+    @FXML
+    public Button registerButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                checkUser = usernameText.getText().toString();
-                checkPassword = passwordText.getText().toString();
 
-                ServerJSONHandler s = new ServerJSONHandler();
-
-                if(login(s, checkUser, checkPassword)){
-                    Error.setText("Success");
-                    Error.setTextFill(Color.GREEN);
-                }
-                else{
-                    Error.setText("Incorrect user or password");
-                    Error.setTextFill(Color.RED);
-                }
-                usernameText.setText("");
-                passwordText.setText("");
-            }
-        });
     }
 
 
-    boolean login(ServerJSONHandler s, String username, String password) {
+    public boolean login(ServerJSONHandler s, String username, String password) {
 
         boolean returnVal = false;
 

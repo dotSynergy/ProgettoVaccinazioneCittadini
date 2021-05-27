@@ -12,6 +12,7 @@ module cittadini {
     requires java.net.http;
 
     opens cittadini to javafx.fxml;
+    opens cittadini.controllers to javafx.fxml;
 
     exports cittadini;
     exports cittadini.controllers;
