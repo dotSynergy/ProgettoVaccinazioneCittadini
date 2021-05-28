@@ -79,9 +79,11 @@ public class App extends Application {
 
         registerController.registrationButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                if(registerController.register(s))
+                boolean res;
+                if(res = registerController.register(s)) {
+                    System.out.println(res);
                     stage.setScene(loginScene);
-                else registerController.error.setText("Error");
+                }else registerController.error.setText("Error");
             }
         });
 

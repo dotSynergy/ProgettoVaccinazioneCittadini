@@ -57,6 +57,15 @@ public class ServerJSONHandler {
     }
 
     /**
+     * Get the response code for the current request.
+     *
+     * @return the response code
+     */
+    public int getResponseCode(){
+        return responseCode;
+    }
+
+    /**
      * Sets method.
      *
      * @param method the method
@@ -92,10 +101,8 @@ public class ServerJSONHandler {
      * Make web request and returns a json array as completable future.
      *
      * @return completable future
-     * @throws IOException          the io exception
-     * @throws InterruptedException the interrupted exception
      */
-    public CompletableFuture<JSONArray> makeRequest() throws IOException, InterruptedException, ServerStatusException {
+    public CompletableFuture<JSONArray> makeRequest() throws IOException, InterruptedException {
 
         return CompletableFuture.supplyAsync(new Supplier<JSONArray>() {
             @Override
@@ -115,6 +122,8 @@ public class ServerJSONHandler {
                 var client = HttpClient.newHttpClient();
                 try {
                     HttpResponse<String> t = client.send(request.build(), HttpResponse.BodyHandlers.ofString());
+
+                    responseCode = t.statusCode();
 
                     if(t.statusCode() != 200)
                         throw new ServerStatusException(t.statusCode() + " on " + endpoint);
