@@ -17,12 +17,13 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * Home controller for the "home" view.
+ *
  * @author SEDE COMO
  * @author Samuele Barella - mat.740688
- * @author Lorenzo Pengue -
+ * @author Lorenzo Pengue - mat.740727
  * @author Andrea Pini - mat.740675
  */
-
 public class HomeController implements Initializable {
     private int centerID;
 
@@ -30,6 +31,9 @@ public class HomeController implements Initializable {
     private String surname;
     private String cf;
 
+    /**
+     * Server connector
+     */
     ServerJSONHandler s;
 
     @FXML

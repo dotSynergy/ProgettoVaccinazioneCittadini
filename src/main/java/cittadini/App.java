@@ -19,7 +19,7 @@ import java.io.IOException;
  *
  *       @author SEDE COMO
  *       @author Samuele Barella - mat.740688
- *       @author Lorenzo Pengue -
+ *       @author Lorenzo Pengue - mat.740727
  *       @author Andrea Pini - mat.740675
  *
  */

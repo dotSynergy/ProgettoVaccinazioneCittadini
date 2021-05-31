@@ -1,70 +1,107 @@
 package cittadini.controllers;
-/*
+/**
  *       AUTORI - COMO:
  *       Samuele Barella - mat.740688
- *       Lorenzo Pengue -
+ *       Lorenzo Pengue - mat.740727
  *       Andrea Pini - mat.740675
  */
 
 import cittadini.web.ServerJSONHandler;
-import cittadini.web.ServerStatusException;
 import cittadini.web.WebMethods;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.SecureRandom;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Register controller for the "register" view.
+ */
 public class RegisterController implements Initializable {
 
 
+    /**
+     * Text field for entering name.
+     */
     @FXML
     public TextField nameText;
 
+    /**
+     * Text field for entering surname.
+     */
     @FXML
     public TextField surnameText;
 
+    /**
+     * Text field for entering fiscal code.
+     */
     @FXML
     public TextField cfText;
 
+    /**
+     * Text field for entering username.
+     */
     @FXML
     public TextField usernameText;
 
+    /**
+     * Text field for entering password.
+     */
     @FXML
     public TextField passwordText;
 
+    /**
+     * Text field for entering nation.
+     */
     @FXML
     public TextField nationText;
 
+    /**
+     * Text field for entering region.
+     */
     @FXML
     public TextField regionText;
 
+    /**
+     * Text field for entering province.
+     */
     @FXML
     public TextField provinceText;
 
+    /**
+     * Text field for entering city.
+     */
     @FXML
     public TextField cityText;
 
+    /**
+     * Text field for entering street.
+     */
     @FXML
     public TextField streetText;
 
+    /**
+     * Button to register a new user.
+     */
     @FXML
     public Button registrationButton;
 
+    /**
+     * Button to return to the login view.
+     */
     @FXML
     public Button backButton;
 
+    /**
+     * Label to display registration errors or successes.
+     */
     @FXML
     public Label error;
 
@@ -90,6 +127,12 @@ public class RegisterController implements Initializable {
     }
 
 
+    /**
+     * Register function that takes user data for the registration
+     *
+     * @param s = server connector
+     * @return the boolean
+     */
     public boolean register(ServerJSONHandler s) {
 
         boolean returnVal = false;

@@ -1,11 +1,11 @@
 package cittadini.controllers;
 
 /**
- * The Login controller for the Login view.
+ * Login controller for the Login view.
  *
  *       @author SEDE COMO
  *       @author Samuele Barella - mat.740688
- *       @author Lorenzo Pengue -
+ *       @author Lorenzo Pengue - mat.740727
  *       @author Andrea Pini - mat.740675
  *
  */
@@ -13,20 +13,11 @@ package cittadini.controllers;
 import cittadini.web.ServerJSONHandler;
 import cittadini.web.ServerStatusException;
 import cittadini.web.WebMethods;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -36,30 +27,55 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 
 
+/**
+ * Controller for the "login" view.
+ */
 public class LoginController implements Initializable {
 
+    /**
+     * Text field for entering username.
+     */
     @FXML
     public TextField usernameText;
 
+    /**
+     * Text field for entering password.
+     */
     @FXML
     public TextField passwordText;
 
+    /**
+     * Label to display login errors or successes.
+     */
     @FXML
     public Label errorLabel;
 
+    /**
+     * Button to log in.
+     */
     @FXML
     public Button loginButton;
 
+    /**
+     * Button that opens the registration view to register a new user
+     */
     @FXML
     public Button registerButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
     }
 
 
+    /**
+     * Login function that takes username and password for the authentication
+     *
+     * @param s        the s = server connector
+     * @param username the username
+     * @param password the password
+     * @return the boolean
+     */
     public boolean login(ServerJSONHandler s, String username, String password) {
 
         boolean returnVal = false;
