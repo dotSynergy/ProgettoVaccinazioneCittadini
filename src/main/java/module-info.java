@@ -10,13 +10,14 @@ module cittadini {
     requires javafx.fxml;
     requires org.json;
     requires java.net.http;
+    requires org.joda.time;
 
     opens cittadini to javafx.fxml;
     opens cittadini.controllers to javafx.fxml;
+    opens cittadini.models to javafx.fxml;
 
     exports cittadini;
     exports cittadini.controllers;
     exports cittadini.web;
     exports cittadini.models;
-    opens cittadini.models to javafx.fxml;
 }

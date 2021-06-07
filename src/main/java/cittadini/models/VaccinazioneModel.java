@@ -1,5 +1,12 @@
 package cittadini.models;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.DateTimeParser;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,17 +22,30 @@ public class VaccinazioneModel {
 
     public int idCittadino;
 
-    public Date dataVaccino;
+    public DateTime dataVaccinazione;
+
+    /**
+     * model from json
+     * @param json the json object
+     */
+    public VaccinazioneModel(JSONObject json){
+        this(
+                json.getInt("idVaccinazione"),
+                json.getInt("idCittadino"),
+                json.getString("dataVaccinazione")
+        );
+    }
 
     public VaccinazioneModel(int idVaccinazione, int idCittadino, String dateString){
         this.idCittadino = idCittadino;
         this.idVaccinazione = idVaccinazione;
-        this.dataVaccino = new Date(dateString);
+        this.dataVaccinazione = new DateTime(dateString);
     }
 
     @Override
     public String toString(){
-        return dataVaccino.toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return sdf.format(dataVaccinazione.toDate());
     }
 
 }

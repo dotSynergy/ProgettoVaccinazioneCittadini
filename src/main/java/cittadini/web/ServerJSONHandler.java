@@ -125,9 +125,9 @@ public class ServerJSONHandler {
 
                     responseCode = t.statusCode();
 
-                    if(t.statusCode() != 200)
+                    if(t.statusCode() != 200 && t.statusCode() != 201 )
                         throw new ServerStatusException(t.statusCode() + " on " + endpoint);
-                    return new JSONArray(t.body());
+                    return new JSONArray(t.body().isEmpty() ? "[{}]" : t.body());
 
                 } catch (IOException | InterruptedException | ServerStatusException | JSONException e) {
                     e.printStackTrace();

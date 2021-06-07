@@ -1,5 +1,9 @@
 package cittadini.models;
 
+import org.joda.time.DateTime;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,9 +20,25 @@ public class EventoAvversoModel {
     public String note;
     public int idVaccinazione;
     public int idCentro;
-    public Date inseritoIl;
+    public DateTime inseritoIl;
 
-    public EventoAvversoModel(int idEvento, String descrizione, int gravita, String note, int idVaccinazione, int idCentro){
+    /**
+     * model from json
+     * @param json the json object
+     */
+    public EventoAvversoModel(JSONObject json){
+        this(
+                json.getInt("idEvento"),
+                json.getString("descrizione"),
+                json.getInt("gravita"),
+                json.getString("note"),
+                json.getInt("idVaccinazione"),
+                json.getInt("idCentro"),
+                json.getString("inseritoIl")
+        );
+    }
+
+    public EventoAvversoModel(int idEvento, String descrizione, int gravita, String note, int idVaccinazione, int idCentro, String inseritoIl){
 
         this.idEvento = idEvento;
         this.descrizione = descrizione;
@@ -26,11 +46,13 @@ public class EventoAvversoModel {
         this.note = note;
         this.idVaccinazione = idVaccinazione;
         this.idCentro = idCentro;
+        this.inseritoIl = new DateTime(inseritoIl);
 
     }
 
     @Override
     public String toString() {
-        return descrizione;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return sdf.format(inseritoIl.toDate()) + "; gravitá: "+ gravita +"; descrizione: " + descrizione;
     }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="248.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cittadini.controllers.DialogController">
+   <children>
+      <ChoiceBox fx:id="gravitySelect" layoutX="14.0" layoutY="26.0" prefHeight="26.0" prefWidth="79.0" />
+      <Button fx:id="sendButton" layoutX="151.0" layoutY="211.0" mnemonicParsing="false" text="Invia" />
+      <Button fx:id="cancelButton" layoutX="207.0" layoutY="211.0" mnemonicParsing="false" text="Annulla" textFill="#d30909" />
+      <Label layoutX="14.0" layoutY="6.0" text="Gravitá" />
+      <TextField fx:id="descriptionText" layoutX="103.0" layoutY="26.0" />
+      <Label layoutX="103.0" layoutY="6.0" text="Descrizione" />
+      <TextArea fx:id="noteTextArea" layoutX="15.0" layoutY="82.0" prefHeight="123.0" prefWidth="259.0" />
+      <Label layoutX="14.0" layoutY="63.0" text="Note" />
+   </children>
+</AnchorPane>
