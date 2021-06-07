@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Andrea Pini - mat.740675
  */
 
-public class VaccinazioniModel {
+public class VaccinazioneModel {
 
     public int idVaccinazione;
 
@@ -17,7 +17,7 @@ public class VaccinazioniModel {
 
     public Date dataVaccino;
 
-    public VaccinazioniModel(int idVaccinazione, int idCittadino, String dateString){
+    public VaccinazioneModel(int idVaccinazione, int idCittadino, String dateString){
         this.idCittadino = idCittadino;
         this.idVaccinazione = idVaccinazione;
         this.dataVaccino = new Date(dateString);

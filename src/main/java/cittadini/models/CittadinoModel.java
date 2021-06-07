@@ -7,6 +7,6 @@ package cittadini.models;
  * @author Andrea Pini - mat.740675
  */
 
-public class EventiAvversiModel {
+public class CittadinoModel {
 
 }

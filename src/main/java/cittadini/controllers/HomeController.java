@@ -66,12 +66,31 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        setupStaticElements();
+
+        setupDynamicElements();
+
+    }
+
+
+    /**
+     * setup for static elements in the scene
+     */
+    private void setupStaticElements(){
+
         //static ui elements
         ObservableList<String> choices = FXCollections.observableArrayList();
         choices.addAll("hub", "ospedaliero","aziendale");
 
         checkType.setItems(choices);
         checkType.getSelectionModel().selectFirst();
+
+    }
+
+    /**
+     * setup for dynamic elements in the scene
+     */
+    private void setupDynamicElements(){
 
         //dynamic ui elements
 
@@ -122,7 +141,7 @@ public class HomeController implements Initializable {
         assert citizenJson != null;
         JSONArray citizenJsonArray = citizenJson.join();
 
-        if(citizenJson != null && citizenJsonArray.length() > 0) {
+        if(citizenJsonArray.length() > 0) {
             JSONObject o = citizenJsonArray.getJSONObject(0);
 
             nameLabel.setText(o.getString("nome"));
@@ -177,6 +196,15 @@ public class HomeController implements Initializable {
                 });
     }
 
+    /**
+     * search function to filter results
+     *
+     * @param obs observable list of components
+     * @param futureJson expected center json data
+     * @param addressesJson expected addresses json data
+     * @param filter string to filter with
+     * @param nameOrCity bool to choose which search type to use
+     */
     private void cercaCentroVaccinale(ObservableList<String> obs,
                                       CompletableFuture<JSONArray> futureJson,
                                       CompletableFuture<JSONArray> addressesJson,
@@ -220,6 +248,11 @@ public class HomeController implements Initializable {
         }
     }
 
+    /**
+     * @param obs observable list of components
+     * @param centersJson json data to fill the listview with
+     * @param filter string to filter out certain names
+     */
     private void fillCentersList( ObservableList<String> obs, JSONArray centersJson, String filter)
     {
         obs.removeAll();
@@ -235,4 +268,5 @@ public class HomeController implements Initializable {
             }
         }
     }
+
 }
