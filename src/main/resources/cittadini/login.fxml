@@ -35,7 +35,7 @@
       </ImageView>
       <TextField fx:id="usernameText" layoutX="285.0" layoutY="167.0" prefHeight="25.0" prefWidth="126.0" />
       <PasswordField fx:id="passwordText" layoutX="285.0" layoutY="205.0" prefHeight="25.0" prefWidth="126.0" />
-      <Label fx:id="errorLabel" layoutX="285.0" layoutY="251.0" prefHeight="19.0" prefWidth="126.0" />
+      <Label fx:id="errorLabel" layoutX="285.0" layoutY="251.0" prefHeight="19.0" prefWidth="143.0" />
       <Button fx:id="loginButton" layoutX="432.0" layoutY="164.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="80.0" text="Accedi">
          <font>
             <Font name="System Bold" size="15.0" />

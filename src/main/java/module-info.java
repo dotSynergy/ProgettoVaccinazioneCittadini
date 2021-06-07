@@ -17,4 +17,6 @@ module cittadini {
     exports cittadini;
     exports cittadini.controllers;
     exports cittadini.web;
+    exports cittadini.models;
+    opens cittadini.models to javafx.fxml;
 }
