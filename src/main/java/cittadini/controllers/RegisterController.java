@@ -133,7 +133,7 @@ public class RegisterController implements Initializable {
      * @param s = server connector
      * @return the boolean
      */
-    public boolean register(ServerJSONHandler s) {
+    public boolean registraVaccinato(ServerJSONHandler s) {
 
         boolean returnVal = false;
 

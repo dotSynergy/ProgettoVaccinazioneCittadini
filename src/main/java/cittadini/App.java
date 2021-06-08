@@ -80,7 +80,7 @@ public class App extends Application {
         registerController.registrationButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 boolean res;
-                if(res = registerController.register(s)) {
+                if(res = registerController.registraVaccinato(s)) {
                     System.out.println(res);
                     stage.setScene(loginScene);
                 }else registerController.error.setText("Error");

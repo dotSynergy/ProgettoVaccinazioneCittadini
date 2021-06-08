@@ -395,6 +395,8 @@ public class HomeController implements Initializable {
                             @Override
                             public void handle(Event event) {
 
+                                //inserisciEventiAvversi
+
                                 Stage dialog = new Stage();
                                 Parent root = null;
                                 FXMLLoader loader = new FXMLLoader(App.class.getResource( "dialog.fxml" ));
