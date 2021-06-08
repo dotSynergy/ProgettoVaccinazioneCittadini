@@ -315,6 +315,7 @@ public class HomeController implements Initializable {
 
             boolean visible = true;
 
+
             if(returnJson.join().length() == 0) {
                 regButton.setVisible(visible);
                 registeredLabel.setVisible(!visible);
@@ -339,7 +340,9 @@ public class HomeController implements Initializable {
                 regButton.setVisible(!visible);
                 registeredLabel.setVisible(visible);
             }
+
             loadVaccinations();
+
         }).start();
     }
 
@@ -369,6 +372,9 @@ public class HomeController implements Initializable {
                             VaccinazioneModel tmp = new VaccinazioneModel(json);
                             vaccinationsObservable.add(tmp);
                         }
+                    } else {
+                        regButton.setVisible(false);
+                        registeredLabel.setVisible(false);
                     }
                 }
             });

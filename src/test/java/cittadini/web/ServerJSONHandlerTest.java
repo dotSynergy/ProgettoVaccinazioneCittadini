@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 /**
  * The type Server json handler test.
@@ -25,7 +24,7 @@ class ServerJSONHandlerTest {
      */
     @DisplayName("Test makeRequest")
     @Test
-     void makeRequest() throws IOException, InterruptedException, ServerStatusException {
+     public void makeRequest() throws IOException, InterruptedException, ServerStatusException {
 
         ServerJSONHandler s = new ServerJSONHandler();
 
@@ -40,7 +39,7 @@ class ServerJSONHandlerTest {
 
     }
 
-    void login(ServerJSONHandler s) {
+    public void login(ServerJSONHandler s) {
 
         try {
             JSONObject jsonobj = new JSONObject("{\'userName\': \'test\', \'password\': \'test\'}");

@@ -8,6 +8,7 @@
 module cittadini {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires org.json;
     requires java.net.http;
     requires org.joda.time;
