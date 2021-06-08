@@ -353,7 +353,7 @@ public class HomeController implements Initializable {
         new Thread(() -> {
             CompletableFuture<JSONArray> j = null;
             try {
-                j = s.setMethod(WebMethods.GET).setEndpoint("Vaccinati_"+selectedCentre.nomeCentro+"?idCittadino.eq."+cittadino.idCittadino).makeRequest();
+                j = s.setMethod(WebMethods.GET).setEndpoint("Vaccinati_"+selectedCentre.nomeCentro+"?idCittadino=eq."+cittadino.idCittadino).makeRequest();
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -439,7 +439,7 @@ public class HomeController implements Initializable {
         new Thread(() -> {
             CompletableFuture<JSONArray> j = null;
             try {
-                j = s.setMethod(WebMethods.GET).setEndpoint("EventiAvversi?idVaccinazione.eq."+selectedVaccination.idVaccinazione).makeRequest();
+                j = s.setMethod(WebMethods.GET).setEndpoint("EventiAvversi?idVaccinazione=eq."+selectedVaccination.idVaccinazione).makeRequest();
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
