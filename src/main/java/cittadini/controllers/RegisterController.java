@@ -1,5 +1,5 @@
 package cittadini.controllers;
-/**
+/*
  *       AUTORI - COMO:
  *       Samuele Barella - mat.740688
  *       Lorenzo Pengue - mat.740727
@@ -142,16 +142,16 @@ public class RegisterController implements Initializable {
 
         JSONObject jsonobj = new JSONObject();
 
-        jsonobj.put("nome", nameText.getText().toString());
-        jsonobj.put("cognome", surnameText.getText().toString());
-        jsonobj.put("codiceFiscale", cfText.getText().toString());
-        jsonobj.put("userName", usernameText.getText().toString());
-        jsonobj.put("pass", passwordText.getText().toString());
-        jsonobj.put("nazione", nationText.getText().toString());
-        jsonobj.put("regione", regionText.getText().toString());
-        jsonobj.put("provincia", provinceText.getText().toString());
-        jsonobj.put("comune", cityText.getText().toString());
-        jsonobj.put("via", streetText.getText().toString());
+        jsonobj.put("nome", nameText.getText());
+        jsonobj.put("cognome", surnameText.getText());
+        jsonobj.put("codiceFiscale", cfText.getText());
+        jsonobj.put("userName", usernameText.getText());
+        jsonobj.put("pass", passwordText.getText());
+        jsonobj.put("nazione", nationText.getText());
+        jsonobj.put("regione", regionText.getText());
+        jsonobj.put("provincia", provinceText.getText());
+        jsonobj.put("comune", cityText.getText());
+        jsonobj.put("via", streetText.getText());
 
         try {
             CompletableFuture<JSONArray> json = s
@@ -162,9 +162,7 @@ public class RegisterController implements Initializable {
 
             json.join();
 
-            if(s.getResponseCode() == 200)
-                returnVal = true;
-            else returnVal = false;
+            returnVal = s.getResponseCode() == 200;
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

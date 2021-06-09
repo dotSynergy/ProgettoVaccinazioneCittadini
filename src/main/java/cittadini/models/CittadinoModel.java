@@ -2,8 +2,6 @@ package cittadini.models;
 
 import org.json.JSONObject;
 
-import java.util.Locale;
-
 /**
  * @author SEDE COMO
  * @author Samuele Barella - mat.740688

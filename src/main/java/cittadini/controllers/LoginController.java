@@ -1,6 +1,6 @@
 package cittadini.controllers;
 
-/**
+/*
  * Login controller for the Login view.
  *
  *       @author SEDE COMO

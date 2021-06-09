@@ -4,7 +4,6 @@ import org.joda.time.DateTime;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @author SEDE COMO
