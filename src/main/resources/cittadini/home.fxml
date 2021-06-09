@@ -14,7 +14,7 @@
       </Label>
       <Pane layoutX="299.0" layoutY="12.0" prefHeight="298.0" prefWidth="253.0" style="-fx-background-color: lightgrey;">
          <children>
-            <Label layoutX="11.0" layoutY="14.0" text="Informazioni Cittadino">
+            <Label layoutX="11.0" layoutY="15.0" text="Informazioni Cittadino">
                <font>
                   <Font size="20.0" />
                </font>
@@ -37,7 +37,7 @@
                </font>
             </Label>
             <Label fx:id="cfLabel" layoutX="14.0" layoutY="94.0" prefHeight="17.0" prefWidth="234.0" />
-            <Label layoutX="10.0" layoutY="110.0" prefHeight="25.0" prefWidth="265.0" text="Informazioni Centro Vaccinale">
+            <Label layoutX="7.0" layoutY="110.0" prefHeight="25.0" prefWidth="265.0" text="Informazioni Centro Vaccinale">
                <font>
                   <Font size="16.0" />
                </font>
@@ -49,7 +49,7 @@
             </Label>
             <Label layoutX="14.0" layoutY="152.0" prefHeight="17.0" prefWidth="82.0" text="Tipologia:">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Label>
             <Label layoutX="13.0" layoutY="209.0" prefHeight="17.0" prefWidth="74.0" text="Indirizzo:">
                <font>
@@ -65,7 +65,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="eventsLabel" layoutX="131.0" layoutY="169.0" />
+            <Label fx:id="eventsLabel" layoutX="131.0" layoutY="171.0" prefHeight="16.0" prefWidth="67.0" />
             <Label layoutX="13.0" layoutY="190.0" text="Media Gravitá eventi: ">
                <font>
                   <Font name="System Bold" size="13.0" />
