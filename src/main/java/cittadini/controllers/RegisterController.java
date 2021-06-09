@@ -105,6 +105,11 @@ public class RegisterController implements Initializable {
     @FXML
     public Label error;
 
+    /**
+     * the max amount of characters in province text box
+     */
+    private final int PROVINCE_LIMIT = 2;
+
     private boolean validation;
 
 
@@ -122,7 +127,16 @@ public class RegisterController implements Initializable {
                     validation = true;
                 }
             }
+        });
 
+        provinceText.lengthProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() > oldValue.intValue()) {
+                // Check if the new character is greater than LIMIT
+                if (provinceText.getText().length() >= PROVINCE_LIMIT) {
+
+                    provinceText.setText(provinceText.getText().substring(0, PROVINCE_LIMIT));
+                }
+            }
         });
     }
 

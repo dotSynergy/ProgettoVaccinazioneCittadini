@@ -478,7 +478,8 @@ public class HomeController implements Initializable {
         new Thread(() -> {
             CompletableFuture<JSONArray> j = null;
             try {
-                j = s.setMethod(WebMethods.GET).setEndpoint("EventiAvversi?idVaccinazione=eq."+selectedVaccination.idVaccinazione).makeRequest();
+                j = s.setMethod(WebMethods.GET).setEndpoint("EventiAvversi?idVaccinazione=eq."+selectedVaccination.idVaccinazione+"&idCentro=eq.+"+selectedCentre.idCentro).makeRequest();
+                System.out.println(selectedVaccination.idVaccinazione);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -496,6 +497,28 @@ public class HomeController implements Initializable {
                         eventsObservable.add(tmp);
                     }
                 }
+
+                eventsList.setCellFactory(cell -> new ListCell<>() {
+
+                    final Tooltip tooltip = new Tooltip();
+
+                    @Override
+                    protected void updateItem(EventoAvversoModel event, boolean empty) {
+                        super.updateItem(event, empty);
+
+                        if (event == null || empty) {
+                            setText(null);
+                            setTooltip(null);
+                        } else {
+                            // A book is to be listed in this cell
+                            setText(event.toString());
+
+                            // Let's show our Author when the user hovers the mouse cursor over this row
+                            tooltip.setText(event.note);
+                            setTooltip(tooltip);
+                        }
+                    }
+                });
             });
 
         }).start();
