@@ -62,6 +62,12 @@ public class LoginController implements Initializable {
     @FXML
     public Button registerButton;
 
+    /**
+     * Button that opens the centres view to guests
+     */
+    @FXML
+    public Button guestLogin;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

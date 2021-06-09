@@ -72,7 +72,7 @@ public class HomeController implements Initializable {
     private ListView<EventoAvversoModel> eventsList;
 
     @FXML
-    private Label nameLabel, surnameLabel, cfLabel, nameLabel2, typeLabel, addressLabel, vaccinationWarningLabel, registeredLabel;
+    private Label nameLabel, surnameLabel, cfLabel, nameLabel2, typeLabel, addressLabel, vaccinationWarningLabel, registeredLabel, avgEventLabel, eventsLabel;
 
     @FXML
     private ChoiceBox<String> checkType;
@@ -162,12 +162,19 @@ public class HomeController implements Initializable {
         assert citizenJson != null;
         JSONArray citizenJsonArray = citizenJson.join();
 
-        if(citizenJsonArray.length() > 0) {
-            cittadino = new CittadinoModel(citizenJsonArray.getJSONObject(0));
+        if(citizenJsonArray.length() > 0 && !citizenJsonArray.isEmpty()) {
+            System.out.println(citizenJsonArray.getJSONObject(0).length());
+            if(citizenJsonArray.getJSONObject(0).length() > 0) {
+                cittadino = new CittadinoModel(citizenJsonArray.getJSONObject(0));
 
-            nameLabel.setText(cittadino.nome);
-            surnameLabel.setText(cittadino.cognome);
-            cfLabel.setText(cittadino.codiceFiscale);
+                nameLabel.setText(cittadino.nome);
+                surnameLabel.setText(cittadino.cognome);
+                cfLabel.setText(cittadino.codiceFiscale);
+            } else {
+                nameLabel.setText("Ospite");
+                surnameLabel.setText("Ospite");
+                cfLabel.setText("Ospite");
+            }
 
         }
 
@@ -196,6 +203,7 @@ public class HomeController implements Initializable {
                         if(t1 == null)
                             return;
 
+                        //recupero i dati del centro
                         JSONArray centreList = finalCentersJson.join();
                         JSONArray addressesList = finalAddressesJson.join();
                         for (int i = 0; i < centreList.length(); i++){
@@ -211,8 +219,39 @@ public class HomeController implements Initializable {
 
                                 addressLabel.setText(selectedCentre.indirizzo.toString());
 
+                                new Thread(() -> {
+                                    CompletableFuture<JSONArray> jsonStats = null;
+                                    try {
+                                        jsonStats = s
+                                                .setEndpoint("EventiAvversi?idCentro=eq."+ selectedCentre.idCentro)
+                                                .setMethod(WebMethods.GET)
+                                                .setData(new JSONObject())
+                                                .makeRequest();
+                                    } catch (IOException | InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    assert jsonStats != null;
+                                    JSONArray j = jsonStats.join();
+
+                                    Platform.runLater(new Runnable(){
+                                        @Override
+                                        public void run() {
+
+                                            eventsLabel.setText(String.valueOf(j.length()));
+                                            float avg = 0;
+                                            for(int k = 0; k < j.length(); k++)
+                                                avg += j.getJSONObject(k).getInt("gravita");
+                                            avg = avg / j.length();
+                                            avgEventLabel.setText(String.valueOf(avg));
+
+                                        }
+                                    });
+                                }).start();
+
                                 try {
-                                    checkRegistration(cittadino.idCittadino, selectedCentre.idCentro);
+                                    if(cittadino != null)
+                                        checkRegistration(cittadino.idCittadino, selectedCentre.idCentro);
                                 } catch (IOException | InterruptedException e) {
                                     e.printStackTrace();
                                 }

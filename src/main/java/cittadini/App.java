@@ -42,6 +42,8 @@ public class App extends Application {
 
         stage.setScene(loginScene);
 
+        stage.setResizable(false);
+
         LoginController loginController = loginLoader.getController();
         RegisterController registerController = registerLoader.getController();
 
@@ -68,6 +70,18 @@ public class App extends Application {
                 }
                 loginController.usernameText.setText("");
                 loginController.passwordText.setText("");
+            }
+        });
+
+        loginController.guestLogin.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                try {
+                    FXMLLoader homeLoader = loadFXML("home");
+                    homeScene = new Scene(homeLoader.load(), 800, 600);
+                    stage.setScene(homeScene);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
