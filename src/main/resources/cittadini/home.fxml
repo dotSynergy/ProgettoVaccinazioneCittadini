@@ -56,7 +56,7 @@
                   <Font name="System Bold" size="12.0" />
                </font></Label>
             <Label fx:id="nameLabel2" layoutX="63.0" layoutY="134.0" prefHeight="17.0" prefWidth="150.0" />
-            <Label fx:id="typeLabel" layoutX="85.0" layoutY="151.0" prefHeight="17.0" prefWidth="150.0" />
+            <Label fx:id="typeLabel" layoutX="100.0" layoutY="153.0" prefHeight="17.0" prefWidth="150.0" />
             <Label fx:id="addressLabel" layoutX="81.0" layoutY="201.0" prefHeight="66.0" prefWidth="150.0" wrapText="true" />
             <Button fx:id="regButton" layoutX="2.0" layoutY="265.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" text="Registrati" visible="false" />
             <Label fx:id="registeredLabel" layoutX="175.0" layoutY="272.0" text="Registrato" visible="false" />
