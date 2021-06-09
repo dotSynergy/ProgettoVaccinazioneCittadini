@@ -12,6 +12,7 @@ module cittadini {
     requires org.json;
     requires java.net.http;
     requires org.joda.time;
+    requires org.junit.jupiter.api;
 
     opens cittadini to javafx.fxml;
     opens cittadini.controllers to javafx.fxml;

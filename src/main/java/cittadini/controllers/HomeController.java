@@ -55,25 +55,53 @@ public class HomeController implements Initializable {
      */
     ServerJSONHandler s;
 
+    /**
+     * the text boxes dedicated to searching through the centres list
+     */
     @FXML
     private TextField nameSearchText, citySearchText;
 
-    @FXML
-    private ListView<CentroVaccinaleModel> vaccineCenterList;
-    @FXML
-    private ListView<VaccinazioneModel> vaccinationsList;
-    @FXML
-    private ListView<EventoAvversoModel> eventsList;
-
-    @FXML
-    private Label nameLabel, surnameLabel, cfLabel, nameLabel2, typeLabel, addressLabel, vaccinationWarningLabel, registeredLabel, avgEventLabel, eventsLabel;
-
+    /**
+     * the choice selection to filter the type of centre
+     */
     @FXML
     private ChoiceBox<String> checkType;
 
+    /**
+     * the list containing vaccine centers
+     */
     @FXML
-    private Button regButton, insertEvent;
+    private ListView<CentroVaccinaleModel> vaccineCenterList;
 
+    /**
+     * the list containing vaccinations for the current citizen
+     */
+    @FXML
+    private ListView<VaccinazioneModel> vaccinationsList;
+
+    /**
+     * the list containing current events for the vaccination
+     */
+    @FXML
+    private ListView<EventoAvversoModel> eventsList;
+
+    /**
+     * the labels for the current data
+     */
+    @FXML
+    private Label nameLabel, surnameLabel, cfLabel, nameLabel2, typeLabel, addressLabel, vaccinationWarningLabel, registeredLabel, avgEventLabel, eventsLabel;
+
+    /**
+     * the button to register to a vaccine centre
+     */
+    @FXML
+    private Button regButton;
+
+    /**
+     * the button to register an event
+     */
+    @FXML
+    private Button insertEvent;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -298,6 +326,7 @@ public class HomeController implements Initializable {
     }
 
     /**
+     * the function to fill the centre list with data
      * @param obs observable list of components
      * @param centersJson json data to fill the listview with
      * @param filter string to filter out certain names
@@ -321,7 +350,8 @@ public class HomeController implements Initializable {
         }
     }
 
-    /** the function to check if a user is registered to a center
+    /**
+     * the function to check if a user is registered to a center
      * @param idCittadino the citizen id
      * @param idCentro the center id
      * @throws IOException exception for the web call

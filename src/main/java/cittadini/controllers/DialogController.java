@@ -19,15 +19,27 @@ import java.util.ResourceBundle;
 
 public class DialogController implements Initializable {
 
+    /**
+     * the description text field
+     */
     @FXML
     public TextField descriptionText;
 
+    /**
+     * the choice box for the gravity of the event
+     */
     @FXML
     public ChoiceBox<Integer> gravitySelect;
 
+    /**
+     * the ulterior notes text area
+     */
     @FXML
     public TextArea noteTextArea;
 
+    /**
+     * the buttons to confirm or cancel the event
+     */
     @FXML
     public Button cancelButton, sendButton;
 
