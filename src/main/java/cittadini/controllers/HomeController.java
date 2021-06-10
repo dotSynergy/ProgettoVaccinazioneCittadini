@@ -438,6 +438,9 @@ public class HomeController implements Initializable {
                         //inserisciEventiAvversi
 
                         Stage dialog = new Stage();
+                        dialog.setResizable(false);
+                        dialog.setTitle("Nuovo Evento Avverso");
+
                         Parent root = null;
                         FXMLLoader loader = new FXMLLoader(App.class.getResource( "dialog.fxml" ));
                         try {
