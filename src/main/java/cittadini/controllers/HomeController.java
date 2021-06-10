@@ -185,7 +185,6 @@ public class HomeController implements Initializable {
         JSONArray citizenJsonArray = citizenJson.join();
 
         if(citizenJsonArray.length() > 0 && !citizenJsonArray.isEmpty()) {
-            System.out.println(citizenJsonArray.getJSONObject(0).length());
             if(citizenJsonArray.getJSONObject(0).length() > 0) {
                 cittadino = new CittadinoModel(citizenJsonArray.getJSONObject(0));
 
@@ -479,7 +478,6 @@ public class HomeController implements Initializable {
             CompletableFuture<JSONArray> j = null;
             try {
                 j = s.setMethod(WebMethods.GET).setEndpoint("EventiAvversi?idVaccinazione=eq."+selectedVaccination.idVaccinazione+"&idCentro=eq.+"+selectedCentre.idCentro).makeRequest();
-                System.out.println(selectedVaccination.idVaccinazione);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }

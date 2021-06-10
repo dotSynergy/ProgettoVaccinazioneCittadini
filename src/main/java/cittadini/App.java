@@ -95,7 +95,6 @@ public class App extends Application {
             public void handle(ActionEvent event) {
                 boolean res;
                 if(res = registerController.registraVaccinato(s)) {
-                    System.out.println(res);
                     stage.setScene(loginScene);
                 }else registerController.error.setText("Error");
             }
